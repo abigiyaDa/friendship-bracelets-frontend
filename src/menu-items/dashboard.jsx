@@ -1,11 +1,12 @@
 // assets
-import { AppstoreOutlined, BgColorsOutlined, DashboardOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, BgColorsOutlined, DashboardOutlined, EnvironmentOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   AppstoreOutlined,
   BgColorsOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  EnvironmentOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -36,6 +37,13 @@ const dashboard = {
       type: 'item',
       url: '/admin/colors',
       icon: icons.BgColorsOutlined
+    },
+    {
+      id: 'pickup-locations',
+      title: 'Pickup locations',
+      type: 'item',
+      url: '/admin/pickup-locations',
+      icon: icons.EnvironmentOutlined
     }
   ]
 };
