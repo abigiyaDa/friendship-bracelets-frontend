@@ -21,12 +21,6 @@ const PickupLocations = Loadable(lazy(() => import('admin/pages/PickupLocations'
 const Products = Loadable(lazy(() => import('admin/pages/Products')));
 const ProductForm = Loadable(lazy(() => import('admin/pages/ProductForm')));
 
-// render - color
-const Color = Loadable(lazy(() => import('pages/component-overview/color')));
-
-// render - shadow
-const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -63,14 +57,6 @@ const MainRoutes = {
         {
           path: 'products/:id/edit',
           element: <ProductForm />
-        },
-        {
-          path: 'color',
-          element: <Color />
-        },
-        {
-          path: 'shadow',
-          element: <Shadow />
         }
       ]
     }

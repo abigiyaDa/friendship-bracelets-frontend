@@ -1,190 +1,210 @@
-# Mantis Free React Material UI Dashboard Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20Mantis%20Free%20React%20-%20The%20Most%20Beautiful%20Material-UI%20Designed%20Admin%20Dashboard%20Template%20&url=https://mantisdashboard.com/free&via=codedthemes&hashtags=react,materialui,nextjs,webdev,developers,typescript)
+# Friendship Bracelets Frontend
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Price](https://img.shields.io/badge/price-FREE-0098f7.svg)](https://github.com/codedthemes/mantis-free-react-admin-template/blob/master/LICENSE)
-[![GitHub package version](https://img.shields.io/github/package-json/v/codedthemes/mantis-free-react-admin-template)](https://github.com/codedthemes/mantis-free-react-admin-template/)
-[![Download ZIP](https://img.shields.io/badge/Download-ZIP-blue?style=flat-square&logo=github)](https://codedthemes.com/item/mantis-free-mui-admin-template/)
-[![Join Discord](https://img.shields.io/badge/Join-Discord-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.com/invite/p2E2WhCb6s)
+A React frontend for a handmade friendship bracelets shop. It currently provides an admin dashboard for managing the catalog, with a public storefront planned. It talks to a separate Django REST backend.
 
-Mantis is a free and open source React dashboard template made using the Material UI React component library with aim of flexibility and better customizability.
+## Screenshots
 
-### Name Derived From Nature
+<!-- add screenshots here -->
 
-Mantis Logo is inspired from the insect name - 'Mantises' as they have triangular heads with flexible Necks. Also, the name is derived from two popular design systems, Material and Ant Design (M-Ant-is).
+## Features
 
-Mantis has Ant Design principal on top of the Material UI React component library.
+- Admin login with Django credentials using JWT access and refresh tokens.
+- Automatic access-token refresh and redirect to the login page when authentication fails.
+- Protected admin routes and dashboard layout.
+- Dashboard placeholder at `/admin`.
+- Categories management: list, create, edit and delete categories with name, optional slug and image.
+- Colors management: list, create, edit and delete colors with name, hex code and availability.
+- Pickup locations management: list, create, edit and delete locations with name, area, details and active status.
+- Products management:
+  - Paginated, searchable product list with status and category filters.
+  - Create and edit product details, pricing, options, colors and lead time.
+  - Multiple color selection with swatches.
+  - Image upload while creating a product.
+  - Image manager while editing: upload multiple images, set the primary image, reorder images and delete images.
+  - Deactivate and restore products.
+- Snackbar notifications, confirmation dialogs and backend validation errors on form fields.
 
-✨ Support us! If you like this theme, click the ⭐ (Top right) and let it shine
+## Tech stack
 
-![mantis-free-react-dashboard-template.jpg](https://org-public-assets.s3.us-west-2.amazonaws.com/Free-Version-Banners/GITHUB-FREE-REACT-REPO+-+Mantis.png)
+- React 19
+- Vite
+- Material UI (MUI) v9
+- react-router-dom
+- axios
+- react-hook-form
+- SWR
 
-## Table of contents
+Supporting libraries already included by the template: Emotion, Ant Design Icons and MUI X Charts.
 
-- [Getting Started](#getting-started)
-- [Download](#download)
-- [Why Mantis?](#why-mantis)
-- [What's included in Premium Version?](#whats-included-in-premium-version)
-- [Documentation](#documentation)
-- [Browser support](#browser-support)
-- [Technology Stack](#technology-stack)
-- [Mantis Figma UI Kit](#mantis-figma-ui-kit)
-- [Other Technologies](#other-technologies)
-- 💰[Save more with Big Bundle](#save-more-with-big-bundle)💰
-- [More React Dashboard Templates](#more-react-dashboard-templates)
-- [Issues?](#issues)
-- [License](#license)
-- [Contributor](#contributor)
-- [Useful Resources](#useful-resources)
-- [Community](#community)
-- [Follow us](#follow-us)
+## Prerequisites
 
-## Getting Started
+- Node.js v24 (Node 20+ recommended)
+- npm or yarn
+- git
+- The Django REST backend, checked out next to this repository: `../friendship-bracelets` (repository URL: `<backend-repo-url>`)
 
-1. Clone from Github
+## Getting started
 
+1. Clone the repository and enter the project directory.
+
+   ```bash
+   git clone git@github.com:<your-username>/friendship-bracelets-frontend.git
+   cd friendship-bracelets-frontend
+   ```
+
+2. Install dependencies.
+
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+   The template's ESLint 10 setup conflicts with the peer dependency range of `eslint-plugin-jsx-a11y`, so npm may report `ERESOLVE` without this flag. This repository includes an `.npmrc` with `legacy-peer-deps=true`, so plain `npm install` also works. If the `.npmrc` file is removed, pass `--legacy-peer-deps` on every install.
+
+3. Start the backend first.
+
+   ```bash
+   cd ../friendship-bracelets
+   uv sync
+   uv run python manage.py migrate
+   uv run python manage.py createsuperuser
+   uv run python manage.py runserver
+   ```
+
+   Plain Python alternative:
+
+   ```bash
+   cd ../friendship-bracelets
+   python -m venv .venv
+   source .venv/bin/activate
+   # Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   python manage.py migrate
+   python manage.py createsuperuser
+   python manage.py runserver
+   ```
+
+   The admin dashboard logs in with this Django superuser. There is no registration flow.
+
+4. Start the frontend in a separate terminal.
+
+   ```bash
+   cd ../friendship-frontend
+   npm start
+   ```
+
+   Open `http://localhost:3000`.
+
+5. Open `http://localhost:3000/admin/login` and log in with the superuser created above.
+
+## Configuration
+
+- The Vite dev server runs on port `3000`.
+- `vite.config.mjs` proxies `/api` and `/media` to `http://127.0.0.1:8000`. Both must point at the Django backend.
+- To use a different backend URL, change the `target` values for the `/api` and `/media` proxy entries in `vite.config.mjs`.
+- `.env` contains:
+  - `VITE_APP_VERSION` — application version label.
+  - `VITE_APP_BASE_NAME` — Vite `base` path and React Router basename. Keep it as `/` for local development.
+  - `PUBLIC_URL` — template value, currently not used by the Vite configuration.
+  - `GENERATE_SOURCEMAP` — template value, currently not used by the Vite configuration.
+- For production, the API base URL and CORS settings must be configured for the deployed backend. The axios client in `src/services/adminApi.js` uses the same-origin path `/api/admin`, so either serve the frontend behind the same domain/proxy or update the client and refresh URL.
+
+## Available scripts
+
+| Script | Description |
+| --- | --- |
+| `npm start` | Start the Vite development server on port 3000. |
+| `npm run build` | Create a production build. |
+| `npm run preview` | Preview the production build locally. |
+| `npm run lint` | Lint all JavaScript, JSX, TypeScript and TSX files in `src`. |
+| `npm run lint:fix` | Run ESLint and apply automatic fixes. |
+| `npm run prettier` | Format files in `src` with Prettier. |
+
+## Routes
+
+| Route | Access | Page |
+| --- | --- | --- |
+| `/` | Public | Redirects to `/admin`, which requires authentication. |
+| `/admin/login` | Public | Admin login. |
+| `/admin` | Protected | Dashboard placeholder. |
+| `/admin/categories` | Protected | Categories management. |
+| `/admin/colors` | Protected | Colors management. |
+| `/admin/pickup-locations` | Protected | Pickup locations management. |
+| `/admin/products` | Protected | Product list. |
+| `/admin/products/new` | Protected | Create product. |
+| `/admin/products/:id/edit` | Protected | Edit product and manage images. |
+
+The `/login` and `/register` routes are commented out in `src/routes/LoginRoutes.jsx`. Storefront routes are not built yet.
+
+## Project structure
+
+```text
+src/
+├── admin/            Project-specific admin app
+│   ├── api/          Axios calls for categories, colors, pickup locations and products
+│   ├── auth/         Auth context, login page and protected route
+│   ├── components/   Product image manager
+│   └── pages/        Admin pages
+├── services/         Project-specific admin axios client and token handling
+├── routes/           React Router setup for admin and login routes
+├── layout/           Dashboard and auth layouts (Mantis template)
+├── menu-items/       Sidebar configuration (page.jsx and support.jsx are unused template leftovers)
+├── themes/           MUI theme configuration (Mantis template)
+├── pages/            Mostly leftover Mantis demo pages and the dashboard placeholder
+└── sections/         Mostly leftover Mantis template sections
 ```
-git clone https://github.com/codedthemes/mantis-free-react-admin-template.git
-```
 
-2. Install packages
+The public storefront is not built yet. When it is added, it is planned to live in `src/customer/`.
 
-```
-yarn
-```
+## Backend API used
 
-3. Run project
+The axios client base URL is `/api/admin`. Paths below are relative to that base.
 
-```
-yarn run start
-```
+| Area | Method | Path |
+| --- | --- | --- |
+| Auth | POST | `/auth/login/` |
+| Auth | GET | `/auth/me/` |
+| Auth | POST | `/auth/refresh/` |
+| Categories | GET | `/categories/` |
+| Categories | POST | `/categories/` |
+| Categories | PATCH | `/categories/{id}/` |
+| Categories | DELETE | `/categories/{id}/` |
+| Colors | GET | `/colors/` |
+| Colors | POST | `/colors/` |
+| Colors | PATCH | `/colors/{id}/` |
+| Colors | DELETE | `/colors/{id}/` |
+| Pickup locations | GET | `/pickup-locations/` |
+| Pickup locations | POST | `/pickup-locations/` |
+| Pickup locations | PATCH | `/pickup-locations/{id}/` |
+| Pickup locations | DELETE | `/pickup-locations/{id}/` |
+| Products | GET | `/products/` (paginated; supports `search`, `is_active` and `category`) |
+| Products | POST | `/products/` |
+| Products | GET | `/products/{id}/` |
+| Products | PATCH | `/products/{id}/` |
+| Products | DELETE | `/products/{id}/` (deactivates the product) |
+| Product colors | PUT | `/products/{product_id}/colors/` |
+| Product images | POST | `/products/{product_id}/images/` |
+| Product images | PATCH | `/products/{product_id}/images/{image_id}/` |
+| Product images | DELETE | `/products/{product_id}/images/{image_id}/` |
 
-## Download
+## Roadmap
 
-- Mantis Free
-  - [Live Preview](https://mantisdashboard.com/free/)
-  - [Download](https://codedthemes.com/item/mantis-free-mui-admin-template/)
-- Mantis Pro
-  - [Live Preview](https://mantisdashboard.com/)
-  - [Download](https://codedthemes.com/item/mantis-mui-react-dashboard-template/)
+Planned, not built yet:
 
-## Why Mantis?
+- Public storefront: home, product listing, product details, cart, checkout, payment and order lookup.
+- Storefront code under `src/customer/`.
+- Admin orders management.
+- Payment verification.
+- Public registration. Registration is currently disabled; the Register route is commented out in `src/routes/LoginRoutes.jsx` and can be re-enabled later.
 
-Mantis offers everything needed to build an advanced dashboard application. In the initial release, we included following high-end features,
+## Troubleshooting
 
-- Support React19.
-- Professional user interface.
-- Material UI React components(MUI v7).
-- Fully responsive, all modern browser supported.
-- Easy to use code structure
-- Flexible & high-Performance code
-- Simple documentation
+- `npm install` fails with `ERESOLVE`: use `npm install --legacy-peer-deps`. The repository `.npmrc` already sets this, so also check that the file exists.
+- Login returns 401 or 400: confirm the Django backend is running on `http://127.0.0.1:8000` and that the username and password belong to a superuser created with `createsuperuser`.
+- API requests fail or CORS errors appear: check the Vite proxy targets in `vite.config.mjs` and the backend URL. For deployed environments, configure the backend CORS and allowed hosts.
+- Images do not load: check the `/media` proxy target and confirm the backend serves media files while running with `DEBUG=True`.
 
-## What's included in Premium Version?
+## Credits and license
 
-The [Pro version](https://mantisdashboard.com/) of Mantis react template includes features such as TypeScript, apps, authentication methods (i.e. JWT, Auth0, Firebase, AWS, Supabase), advance components, form plugins, layouts, widgets, and more.
+Built on the Mantis Free React Admin Template by CodedThemes (MIT License): https://github.com/codedthemes/mantis-free-react-admin-template
 
-| [Mantis Free](https://mantisdashboard.com/free/)                                                     | [Mantis](https://mantisdashboard.com/)                                            |
-| ---------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| **7** Demo pages                                                                                     | **85+** demo pages                                                                |
-| -                                                                                                    | ✓ Multi-language                                                                  |
-| -                                                                                                    | ✓ Dark/Light Mode 🌓                                                              |
-| -                                                                                                    | ✓ TypeScript version                                                              |
-| -                                                                                                    | ✓ Design files (Figma)                                                            |
-| -                                                                                                    | ✓ Multiple color options                                                          |
-| -                                                                                                    | ✓ RTL                                                                             |
-| -                                                                                                    | ✓ JWT authentications                                                             |
-| -                                                                                                    | ✓ [More components](https://mantisdashboard.com/components-overview/autocomplete) |
-| ✓ [MIT License](https://github.com/codedthemes/mantis-free-react-admin-template/blob/master/LICENSE) | ✓ [Pro License](https://mui.com/store/license/)                                   |
-
-## Documentation
-
-[Mantis documentation](https://codedthemes.gitbook.io/mantis) helps you out in all aspects from Installation to deployment.
-
-## Browser support
-
-<img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/chrome.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/edge.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/safari.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/firefox.png" width="45" height="45" > <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/opera.png" width="45" height="45" >
-
-## Technology Stack
-
-- Material UI V7
-- Built with React Hooks API.
-- React context API for state management.
-- SWR.
-- React Router for navigation routing.
-- Support for Vite.
-- Code splitting.
-- CSS-in-JS.
-
-## Mantis Figma UI Kit
-
-| FREE                                                                                                                        | PRO                                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-|  <a href="https://codedthemes.com/item/mantis-free-figma-ui-kit/" traget="_blank"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/Banners/Figma_Free_Mantis.png" width="450" alt="Figma Free"></a> | <a href="https://codedthemes.com/item/mantis-figma-ui-kit/" traget="_blank"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/Banners/Figma_Pro_Mantis.png" width="450" alt="Figma Pro"></a> |
-
-## Other Technologies
-
-| Technology                                                                                                                        | Free                                                                               | Pro                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| <p align="center"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Angular.png" width="25" height="25"></p>   | [**Free**](https://codedthemes.com/item/mantis-angular-free-admin-template/)       | [**Pro**](https://codedthemes.com/item/mantis-angular-admin-template/)    |
-| <p align="center"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Bootstrap.png" width="30" height="30"></p> | [**Free**](https://codedthemes.com/item/mantis-bootstrap-free-admin-template/)     | [**Pro**](https://codedthemes.com/item/mantis-bootstrap-admin-dashboard/) |
-| <p align="center"><img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Vue.png" width="25" height="25"></p>       | [**Free**](https://codedthemes.com/item/mantis-free-vuetify-vuejs-admin-template/) | [**Pro**](https://codedthemes.com/item/mantis-vue-admin-template/)        |
-
-## Save more with Big Bundle
-
-[![bundle-image](https://org-public-assets.s3.us-west-2.amazonaws.com/Banners/Bundle+banner.png)](https://links.codedthemes.com/jhFBJ)
-
-## More React Dashboard Templates
-
-| Dashboard                                                                                                                                                          | FREE                                                                                | PRO                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Berry%20with%20name.png"  height="30" style="display:inline-block; vertical-align:middle;">   | [**Free**](https://codedthemes.com/item/berry-mui-free-react-admin-template/)       | [**Pro**](https://codedthemes.com/item/berry-material-react-admin-template/)</span>   |
-| <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Datta%20with%20name.png" height="30" style="display:inline-block; vertical-align:middle;">    | [**Free**](https://codedthemes.com/item/datta-able-react-free-admin-template/)      | [**Pro**](https://codedthemes.com/item/datta-able-react-admin-template/)</span>       |
-| <img src="https://org-public-assets.s3.us-west-2.amazonaws.com/logos/Gradient%20with%20name.png" height="30" style="display:inline-block; vertical-align:middle;"> | [**Free**](https://codedthemes.com/item/gradient-able-reactjs-free-admin-template/) | [**Pro**](https://codedthemes.com/item/gradient-able-reactjs-admin-dashboard/)</span> |
-
-## Issues
-
-Please generate a [Github issue](https://github.com/codedthemes/mantis-free-react-admin-template/issues) if you found a bug in any version. We are try our best to resolve the issue.
-
-## License
-
-- Licensed under [MIT](https://github.com/codedthemes/mantis-free-react-admin-template/blob/master/LICENSE)
-- Copyright © [CodedThemes](https://codedthemes.com/)
-
-## Contributor
-
-**CodedThemes Team**
-
-- https://x.com/codedthemes
-- https://github.com/codedthemes
-
-**Rakesh Nakrani**
-
-- https://x.com/rakesh_nakrani
-
-**Brijesh Dobariya**
-
-- https://x.com/dobaria_brijesh
-
-## Useful Resources
-
-- [More Admin Templates From CodedThemes](https://codedthemes.com/item/category/admin-templates/)
-- [Freebies From CodedThemes](https://codedthemes.com/item/category/free-templates/)
-- [Big Bundles](https://codedthemes.com/item/big-bundle/)
-- [Figma UI Kits](https://codedthemes.com/item/category/templates/figma/)
-- [Affiliate Program](https://codedthemes.com/affiliate/)
-- [Blogs](https://blog.codedthemes.com/)
-
-## Community
-
-- 👥Follow [@codedThemes](https://x.com/codedthemes)
-- 🔗Join [Discord](https://discord.com/invite/p2E2WhCb6s)
-- 🔔Subscribe to [CodedTheme Blogs](https://blog.codedthemes.com/)
-
-## Follow Us
-
-- [Twitter](https://twitter.com/codedthemes) 🐦
-- [Dribbble](https://dribbble.com/codedthemes) 🏀
-- [Github](https://github.com/codedthemes) 🐙
-- [LinkedIn](https://www.linkedin.com/company/codedthemes/) 💼
-- [Instagram](https://www.instagram.com/codedthemes/) 📷
-- [Facebook](https://www.facebook.com/codedthemes) 🟦
+This project is licensed under the MIT License, see LICENSE.
