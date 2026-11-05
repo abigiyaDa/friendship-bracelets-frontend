@@ -42,6 +42,7 @@ Supporting libraries already included by the template: Emotion, Ant Design Icons
 - Node.js v24 (Node 20+ recommended)
 - npm or yarn
 - git
+- uv for backend dependency management
 - The Django REST backend, checked out next to this repository: `../friendship-bracelets` (repository URL: `<backend-repo-url>`)
 
 ## Getting started
@@ -65,23 +66,10 @@ Supporting libraries already included by the template: Emotion, Ant Design Icons
 
    ```bash
    cd ../friendship-bracelets
-   uv sync
+   uv sync --frozen
    uv run python manage.py migrate
    uv run python manage.py createsuperuser
    uv run python manage.py runserver
-   ```
-
-   Plain Python alternative:
-
-   ```bash
-   cd ../friendship-bracelets
-   python -m venv .venv
-   source .venv/bin/activate
-   # Windows: .venv\Scripts\activate
-   pip install -r requirements.txt
-   python manage.py migrate
-   python manage.py createsuperuser
-   python manage.py runserver
    ```
 
    The admin dashboard logs in with this Django superuser. There is no registration flow.
@@ -187,25 +175,9 @@ The axios client base URL is `/api/admin`. Paths below are relative to that base
 | Product images | PATCH | `/products/{product_id}/images/{image_id}/` |
 | Product images | DELETE | `/products/{product_id}/images/{image_id}/` |
 
-## Roadmap
-
-Planned, not built yet:
-
-- Public storefront: home, product listing, product details, cart, checkout, payment and order lookup.
-- Storefront code under `src/customer/`.
-- Admin orders management.
-- Payment verification.
-- Public registration. Registration is currently disabled; the Register route is commented out in `src/routes/LoginRoutes.jsx` and can be re-enabled later.
-
 ## Troubleshooting
 
 - `npm install` fails with `ERESOLVE`: use `npm install --legacy-peer-deps`. The repository `.npmrc` already sets this, so also check that the file exists.
 - Login returns 401 or 400: confirm the Django backend is running on `http://127.0.0.1:8000` and that the username and password belong to a superuser created with `createsuperuser`.
 - API requests fail or CORS errors appear: check the Vite proxy targets in `vite.config.mjs` and the backend URL. For deployed environments, configure the backend CORS and allowed hosts.
 - Images do not load: check the `/media` proxy target and confirm the backend serves media files while running with `DEBUG=True`.
-
-## Credits and license
-
-Built on the Mantis Free React Admin Template by CodedThemes (MIT License): https://github.com/codedthemes/mantis-free-react-admin-template
-
-This project is licensed under the MIT License, see LICENSE.
