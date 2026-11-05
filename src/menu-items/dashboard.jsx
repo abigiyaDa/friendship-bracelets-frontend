@@ -1,8 +1,9 @@
 // assets
-import { DashboardOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, DashboardOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
+  AppstoreOutlined,
   DashboardOutlined
 };
 
@@ -20,6 +21,13 @@ const dashboard = {
       url: '/admin',
       icon: icons.DashboardOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'categories',
+      title: 'Categories',
+      type: 'item',
+      url: '/admin/categories',
+      icon: icons.AppstoreOutlined
     }
   ]
 };
