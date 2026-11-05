@@ -61,7 +61,7 @@ Supporting libraries already included by the template: Emotion, Ant Design Icons
 
    The template's ESLint 10 setup conflicts with the peer dependency range of `eslint-plugin-jsx-a11y`, so npm may report `ERESOLVE` without this flag. This repository includes an `.npmrc` with `legacy-peer-deps=true`, so plain `npm install` also works. If the `.npmrc` file is removed, pass `--legacy-peer-deps` on every install.
 
-3. Start the backend first.
+3. Start the backend first. - this is the github for the backend https://github.com/abigiyaDa/friendship-bracelets
 
    ```bash
    cd ../friendship-bracelets
