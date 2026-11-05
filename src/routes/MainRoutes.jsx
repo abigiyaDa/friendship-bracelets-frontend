@@ -17,6 +17,10 @@ const AdminColors = Loadable(lazy(() => import('admin/pages/Colors')));
 // render - admin pickup locations
 const PickupLocations = Loadable(lazy(() => import('admin/pages/PickupLocations')));
 
+// render - admin products
+const Products = Loadable(lazy(() => import('admin/pages/Products')));
+const ProductForm = Loadable(lazy(() => import('admin/pages/ProductForm')));
+
 // render - color
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
 
@@ -47,6 +51,18 @@ const MainRoutes = {
         {
           path: 'pickup-locations',
           element: <PickupLocations />
+        },
+        {
+          path: 'products',
+          element: <Products />
+        },
+        {
+          path: 'products/new',
+          element: <ProductForm />
+        },
+        {
+          path: 'products/:id/edit',
+          element: <ProductForm />
         },
         {
           path: 'color',

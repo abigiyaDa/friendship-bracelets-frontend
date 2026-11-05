@@ -1,12 +1,19 @@
 // assets
-import { AppstoreOutlined, BgColorsOutlined, DashboardOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import {
+  AppstoreOutlined,
+  BgColorsOutlined,
+  DashboardOutlined,
+  EnvironmentOutlined,
+  ShoppingOutlined
+} from '@ant-design/icons';
 
 // icons
 const icons = {
   AppstoreOutlined,
   BgColorsOutlined,
   DashboardOutlined,
-  EnvironmentOutlined
+  EnvironmentOutlined,
+  ShoppingOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -23,6 +30,13 @@ const dashboard = {
       url: '/admin',
       icon: icons.DashboardOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'products',
+      title: 'Products',
+      type: 'item',
+      url: '/admin/products',
+      icon: icons.ShoppingOutlined
     },
     {
       id: 'categories',
