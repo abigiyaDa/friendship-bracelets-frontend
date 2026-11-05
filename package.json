@@ -27,6 +27,7 @@
     "@mui/system": "9.0.1",
     "@mui/x-charts": "9.2.0",
     "@vitejs/plugin-react": "6.0.2",
+    "axios": "^1.21.0",
     "formik": "2.4.9",
     "framer-motion": "12.39.0",
     "lodash-es": "4.18.1",

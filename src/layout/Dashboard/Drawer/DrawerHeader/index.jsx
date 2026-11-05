@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+// material-ui
+import Typography from '@mui/material/Typography';
 
 // project imports
 import DrawerHeaderStyled from './DrawerHeaderStyled';
-import Logo from 'components/logo';
 
 // ==============================|| DRAWER HEADER ||============================== //
 
@@ -18,7 +21,22 @@ export default function DrawerHeader({ open }) {
         paddingLeft: open ? '24px' : 0
       }}
     >
-      <Logo isIcon={!open} sx={{ width: open ? 'auto' : 35, height: 35 }} />
+      <Typography
+        component={Link}
+        to="/admin"
+        variant="h5"
+        sx={{
+          color: 'text.primary',
+          fontWeight: 700,
+          lineHeight: 1.2,
+          textDecoration: 'none',
+          whiteSpace: 'nowrap',
+          fontSize: open ? '1rem' : '0.8rem'
+        }}
+        aria-label="Friendship Bracelets"
+      >
+        {open ? 'Friendship Bracelets' : 'FB'}
+      </Typography>
     </DrawerHeaderStyled>
   );
 }

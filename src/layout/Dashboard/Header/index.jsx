@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
 // project imports
 import AppBarStyled from './AppBarStyled';
@@ -45,6 +46,13 @@ export default function Header() {
       >
         {!drawerOpen ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </IconButton>
+      <Typography
+        variant="h5"
+        noWrap
+        sx={{ ml: { xs: 1, sm: 1.5 }, fontWeight: 700, fontSize: { xs: '0.875rem', sm: '1rem' }, color: 'text.primary' }}
+      >
+        Friendship Bracelets
+      </Typography>
       {headerContent}
     </Toolbar>
   );

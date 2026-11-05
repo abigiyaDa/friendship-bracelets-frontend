@@ -1,21 +1,10 @@
 // assets
-import {
-  AppstoreAddOutlined,
-  AntDesignOutlined,
-  BarcodeOutlined,
-  BgColorsOutlined,
-  FontSizeOutlined,
-  LoadingOutlined
-} from '@ant-design/icons';
+import { BarcodeOutlined, BgColorsOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-  FontSizeOutlined,
   BgColorsOutlined,
-  BarcodeOutlined,
-  AntDesignOutlined,
-  LoadingOutlined,
-  AppstoreAddOutlined
+  BarcodeOutlined
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -26,24 +15,17 @@ const utilities = {
   type: 'group',
   children: [
     {
-      id: 'util-typography',
-      title: 'Typography',
-      type: 'item',
-      url: '/typography',
-      icon: icons.FontSizeOutlined
-    },
-    {
       id: 'util-color',
       title: 'Color',
       type: 'item',
-      url: '/color',
+      url: '/admin/color',
       icon: icons.BgColorsOutlined
     },
     {
       id: 'util-shadow',
       title: 'Shadow',
       type: 'item',
-      url: '/shadow',
+      url: '/admin/shadow',
       icon: icons.BarcodeOutlined
     }
   ]
