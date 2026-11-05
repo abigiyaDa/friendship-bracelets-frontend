@@ -11,6 +11,9 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')))
 // render - admin categories
 const Categories = Loadable(lazy(() => import('admin/pages/Categories')));
 
+// render - admin colors
+const AdminColors = Loadable(lazy(() => import('admin/pages/Colors')));
+
 // render - color
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
 
@@ -33,6 +36,10 @@ const MainRoutes = {
         {
           path: 'categories',
           element: <Categories />
+        },
+        {
+          path: 'colors',
+          element: <AdminColors />
         },
         {
           path: 'color',

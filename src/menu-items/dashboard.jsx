@@ -1,9 +1,10 @@
 // assets
-import { AppstoreOutlined, DashboardOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, BgColorsOutlined, DashboardOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   AppstoreOutlined,
+  BgColorsOutlined,
   DashboardOutlined
 };
 
@@ -28,6 +29,13 @@ const dashboard = {
       type: 'item',
       url: '/admin/categories',
       icon: icons.AppstoreOutlined
+    },
+    {
+      id: 'colors',
+      title: 'Colors',
+      type: 'item',
+      url: '/admin/colors',
+      icon: icons.BgColorsOutlined
     }
   ]
 };
