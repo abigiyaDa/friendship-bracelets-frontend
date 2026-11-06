@@ -5,6 +5,7 @@ A React frontend for a handmade friendship bracelets shop. It currently provides
 ## Screenshots
 
 <img width="1918" height="812" alt="image" src="https://github.com/user-attachments/assets/824094d9-7570-4485-aa29-c3769e063363" />
+<img width="1913" height="904" alt="image" src="https://github.com/user-attachments/assets/d73f21ca-502a-4e77-a1b0-e5656633d1b2" />
 
 
 ## Features
