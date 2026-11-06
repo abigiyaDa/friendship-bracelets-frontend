@@ -36,6 +36,7 @@ export default function Breadcrumbs({
 }) {
   const theme = useTheme();
   const location = useLocation();
+  const homePath = location.pathname.startsWith('/admin') ? '/admin' : '/';
 
   const [main, setMain] = useState();
   const [item, setItem] = useState();
@@ -129,7 +130,7 @@ export default function Breadcrumbs({
             sx={{ gap: 1, justifyContent: rightAlign ? 'space-between' : 'flex-start', alignItems: rightAlign ? 'center' : 'flex-start' }}
           >
             <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
-              <Typography component={Link} to="/" variant="h6" sx={{ color: 'text.secondary', textDecoration: 'none' }}>
+              <Typography component={Link} to={homePath} variant="h6" sx={{ color: 'text.secondary', textDecoration: 'none' }}>
                 {icons && <HomeOutlined style={iconSX} />}
                 {icon && !icons && <HomeFilled style={{ ...iconSX, marginRight: 0 }} />}
                 {(!icon || icons) && 'Home'}
@@ -162,7 +163,7 @@ export default function Breadcrumbs({
 
     let tempContent = (
       <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
-        <Typography component={Link} to="/" variant="h6" sx={{ color: 'text.secondary', textDecoration: 'none' }}>
+        <Typography component={Link} to={homePath} variant="h6" sx={{ color: 'text.secondary', textDecoration: 'none' }}>
           {icons && <HomeOutlined style={iconSX} />}
           {icon && !icons && <HomeFilled style={{ ...iconSX, marginRight: 0 }} />}
           {(!icon || icons) && 'Home'}
