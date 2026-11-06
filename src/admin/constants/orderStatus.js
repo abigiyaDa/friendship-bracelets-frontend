@@ -18,3 +18,16 @@ export const ORDER_STATUS_FLOW = [
   'ready',
   'picked_up'
 ];
+
+// Transitions the admin may trigger manually from the order detail page.
+// payment_review -> approved / pending_payment must go through the payment
+// approve/reject endpoints, so they are deliberately absent here.
+export const ALLOWED_MANUAL_TRANSITIONS = {
+  pending_payment: ['cancelled'],
+  payment_review: ['cancelled'],
+  approved: ['in_production', 'cancelled'],
+  in_production: ['ready'],
+  ready: ['picked_up'],
+  picked_up: [],
+  cancelled: []
+};

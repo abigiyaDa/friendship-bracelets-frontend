@@ -21,6 +21,11 @@ const PickupLocations = Loadable(lazy(() => import('admin/pages/PickupLocations'
 const Products = Loadable(lazy(() => import('admin/pages/Products')));
 const ProductForm = Loadable(lazy(() => import('admin/pages/ProductForm')));
 
+// render - admin orders
+const Orders = Loadable(lazy(() => import('admin/pages/Orders')));
+const OrderCreate = Loadable(lazy(() => import('admin/pages/OrderCreate')));
+const OrderDetail = Loadable(lazy(() => import('admin/pages/OrderDetail')));
+
 // render - admin customers
 const Customers = Loadable(lazy(() => import('admin/pages/Customers')));
 const CustomerDetail = Loadable(lazy(() => import('admin/pages/CustomerDetail')));
@@ -72,6 +77,18 @@ const MainRoutes = {
         {
           path: 'customers/:id',
           element: <CustomerDetail />
+        },
+        {
+          path: 'orders',
+          element: <Orders />
+        },
+        {
+          path: 'orders/new',
+          element: <OrderCreate />
+        },
+        {
+          path: 'orders/:id',
+          element: <OrderDetail />
         },
         {
           path: 'payments',

@@ -1,10 +1,10 @@
 // project import
-import dashboard from './dashboard';
+import { catalog, dashboard, sales } from './dashboard';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard]
+  items: [dashboard, sales, catalog]
 };
 
 export default menuItems;

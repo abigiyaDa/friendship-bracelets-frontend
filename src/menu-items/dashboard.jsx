@@ -5,6 +5,7 @@ import {
   CreditCardOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
+  ShoppingCartOutlined,
   ShoppingOutlined,
   TeamOutlined
 } from '@ant-design/icons';
@@ -16,15 +17,15 @@ const icons = {
   CreditCardOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
+  ShoppingCartOutlined,
   ShoppingOutlined,
   TeamOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
-const dashboard = {
+export const dashboard = {
   id: 'group-dashboard',
-  title: 'Navigation',
   type: 'group',
   children: [
     {
@@ -33,8 +34,46 @@ const dashboard = {
       type: 'item',
       url: '/admin',
       icon: icons.DashboardOutlined,
-      breadcrumbs: false
+      breadcrumbs: false,
+      end: true
+    }
+  ]
+};
+
+export const sales = {
+  id: 'group-sales',
+  title: 'Sales',
+  type: 'group',
+  children: [
+    {
+      id: 'orders',
+      title: 'Orders',
+      type: 'item',
+      url: '/admin/orders',
+      icon: icons.ShoppingCartOutlined
     },
+    {
+      id: 'payments',
+      title: 'Payments',
+      type: 'item',
+      url: '/admin/payments',
+      icon: icons.CreditCardOutlined
+    },
+    {
+      id: 'customers',
+      title: 'Customers',
+      type: 'item',
+      url: '/admin/customers',
+      icon: icons.TeamOutlined
+    }
+  ]
+};
+
+export const catalog = {
+  id: 'group-catalog',
+  title: 'Catalog',
+  type: 'group',
+  children: [
     {
       id: 'products',
       title: 'Products',
@@ -62,22 +101,6 @@ const dashboard = {
       type: 'item',
       url: '/admin/pickup-locations',
       icon: icons.EnvironmentOutlined
-    },
-    {
-      id: 'customers',
-      title: 'Customers',
-      type: 'item',
-      url: '/admin/customers',
-      icon: icons.TeamOutlined
-    },
-    {
-      id: 'payments',
-      title: 'Payments',
-      type: 'item',
-      url: '/admin/payments',
-      icon: icons.CreditCardOutlined
     }
   ]
 };
-
-export default dashboard;
