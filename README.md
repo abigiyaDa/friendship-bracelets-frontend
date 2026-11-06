@@ -40,7 +40,7 @@ Supporting libraries already included by the template: Emotion, Ant Design Icons
 ## Prerequisites
 
 - Node.js v24 (Node 20+ recommended)
-- npm or yarn
+- npm
 - git
 - uv for backend dependency management
 - The Django REST backend, checked out next to this repository: `../friendship-bracelets` (repository URL: `<backend-repo-url>`)

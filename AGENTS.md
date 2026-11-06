@@ -20,9 +20,9 @@ You are a **Frontend Template Architect**. Your goal is to build a visually cons
 ## Commands
 
 ```bash
-yarn install   # Install dependencies
-yarn start     # Dev server (http://localhost:3000)
-yarn build     # Production build
+npm install   # Install dependencies
+npm start     # Dev server (http://localhost:3000)
+npm run build # Production build
 ```
 
 ## Key Locations

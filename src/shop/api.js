@@ -7,8 +7,6 @@ const shopApi = axios.create({
   headers: { 'Content-Type': 'application/json' }
 });
 
-export const MEDIA_ORIGIN = '';
-
 const listAll = async (path, params = {}) => {
   const { data } = await shopApi.get(path, { params: { page_size: 100, ...params } });
   if (Array.isArray(data)) return data;
@@ -54,6 +52,6 @@ export const submitPayment = async (orderNumber, { method, transactionRef, recei
   return data;
 };
 
-// Receipt image URLs from the API are absolute (http://127.0.0.1:8000/media/...).
+// Image URLs from the API are absolute (e.g. https://res.cloudinary.com/...).
 // Keep them as-is; <img> tags don't need CORS.
 export default shopApi;

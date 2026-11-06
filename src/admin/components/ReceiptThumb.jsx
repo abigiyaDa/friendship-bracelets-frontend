@@ -9,11 +9,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Link from '@mui/material/Link';
 
-// Absolute backend URLs (http://127.0.0.1:8000/media/...) are reduced to their
-// path so requests go through the Vite /media proxy instead of hitting Django
-// cross-origin.
+// Image URLs from the API are absolute (e.g. https://res.cloudinary.com/...)
+// and are used as-is. Relative paths are reduced to their path so requests go
+// through the Vite /media proxy instead of hitting Django cross-origin.
 export const getReceiptSrc = (receipt) => {
   if (!receipt) return '';
+
+  if (/^https?:\/\//i.test(receipt)) {
+    return receipt;
+  }
 
   try {
     return new URL(receipt, window.location.origin).pathname;
