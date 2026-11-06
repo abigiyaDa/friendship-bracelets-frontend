@@ -19,8 +19,7 @@ import { useAuth } from './AuthContext';
 // assets
 import EyeOutlined from '@ant-design/icons/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
-
-const BEAD_COLORS = ['#e86a5c', '#f2b544', '#4fb7a8', '#8a6fd1', '#e88bb0', '#e86a5c', '#f2b544', '#4fb7a8'];
+import braceletPhoto from 'assets/images/bracelet-heart.jpg';
 
 const getErrorMessage = (error) => {
   if (!error.response) {
@@ -123,42 +122,26 @@ export default function AdminLogin() {
           Handmade with love
         </Typography>
 
-        {/* Decorative CSS-only bracelet */}
-        <Box sx={{ mt: 10, maxWidth: 420 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: { md: 0.75, lg: 1.25 } }}>
-            {BEAD_COLORS.map((color, index) => {
-              const size = index % 2 === 0 ? { md: 34, lg: 44 } : { md: 28, lg: 36 };
-
-              return (
-                <Box
-                  key={`${color}-${index}`}
-                  sx={{
-                    width: size,
-                    height: size,
-                    flexShrink: 0,
-                    borderRadius: '50%',
-                    background: `radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), ${color} 42%, ${color} 100%)`,
-                    boxShadow: `inset -4px -5px 10px rgba(0, 0, 0, 0.35), 0 8px 14px rgba(0, 0, 0, 0.3)`,
-                    border: '2px solid rgba(255, 255, 255, 0.08)',
-                    transform: index % 2 === 0 ? 'translateY(-5px)' : 'translateY(6px)'
-                  }}
-                />
-              );
-            })}
-          </Box>
-
+        {/* Real bracelet photo */}
+        <Box sx={{ mt: 8, maxWidth: 420 }}>
           <Box
+            component="img"
+            src={braceletPhoto}
+            alt="Handmade red and black heart-pattern friendship bracelets"
             sx={{
-              height: 46,
-              mt: 6,
-              borderRadius: 1,
-              transform: 'rotate(-4deg)',
-              background:
-                'repeating-linear-gradient(45deg, #e86a5c 0 10px, #f2b544 10px 20px, #4fb7a8 20px 30px, #8a6fd1 30px 40px, #e88bb0 40px 50px)',
-              boxShadow: '0 14px 28px rgba(0, 0, 0, 0.35)',
-              opacity: 0.92
+              width: '100%',
+              aspectRatio: '4/5',
+              objectFit: 'cover',
+              objectPosition: 'center 30%',
+              borderRadius: 4,
+              border: '6px solid rgba(255, 255, 255, 0.12)',
+              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.45)',
+              transform: 'rotate(-2deg)'
             }}
           />
+          <Typography sx={{ mt: 2.5, color: 'rgba(255, 255, 255, 0.55)', fontSize: '0.85rem', letterSpacing: '0.04em' }}>
+            Our handmade heart-pattern bracelets
+          </Typography>
         </Box>
       </Box>
 
