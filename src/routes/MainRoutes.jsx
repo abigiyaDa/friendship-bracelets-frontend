@@ -21,6 +21,10 @@ const PickupLocations = Loadable(lazy(() => import('admin/pages/PickupLocations'
 const Products = Loadable(lazy(() => import('admin/pages/Products')));
 const ProductForm = Loadable(lazy(() => import('admin/pages/ProductForm')));
 
+// render - admin customers
+const Customers = Loadable(lazy(() => import('admin/pages/Customers')));
+const CustomerDetail = Loadable(lazy(() => import('admin/pages/CustomerDetail')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -57,6 +61,14 @@ const MainRoutes = {
         {
           path: 'products/:id/edit',
           element: <ProductForm />
+        },
+        {
+          path: 'customers',
+          element: <Customers />
+        },
+        {
+          path: 'customers/:id',
+          element: <CustomerDetail />
         }
       ]
     }

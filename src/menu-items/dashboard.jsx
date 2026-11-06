@@ -4,7 +4,8 @@ import {
   BgColorsOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
-  ShoppingOutlined
+  ShoppingOutlined,
+  TeamOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -13,7 +14,8 @@ const icons = {
   BgColorsOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
-  ShoppingOutlined
+  ShoppingOutlined,
+  TeamOutlined
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -58,6 +60,13 @@ const dashboard = {
       type: 'item',
       url: '/admin/pickup-locations',
       icon: icons.EnvironmentOutlined
+    },
+    {
+      id: 'customers',
+      title: 'Customers',
+      type: 'item',
+      url: '/admin/customers',
+      icon: icons.TeamOutlined
     }
   ]
 };
