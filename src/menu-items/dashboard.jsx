@@ -2,6 +2,7 @@
 import {
   AppstoreOutlined,
   BgColorsOutlined,
+  CreditCardOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
   ShoppingOutlined,
@@ -12,6 +13,7 @@ import {
 const icons = {
   AppstoreOutlined,
   BgColorsOutlined,
+  CreditCardOutlined,
   DashboardOutlined,
   EnvironmentOutlined,
   ShoppingOutlined,
@@ -67,6 +69,13 @@ const dashboard = {
       type: 'item',
       url: '/admin/customers',
       icon: icons.TeamOutlined
+    },
+    {
+      id: 'payments',
+      title: 'Payments',
+      type: 'item',
+      url: '/admin/payments',
+      icon: icons.CreditCardOutlined
     }
   ]
 };

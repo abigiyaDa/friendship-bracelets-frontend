@@ -25,6 +25,9 @@ const ProductForm = Loadable(lazy(() => import('admin/pages/ProductForm')));
 const Customers = Loadable(lazy(() => import('admin/pages/Customers')));
 const CustomerDetail = Loadable(lazy(() => import('admin/pages/CustomerDetail')));
 
+// render - admin payments
+const Payments = Loadable(lazy(() => import('admin/pages/Payments')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -69,6 +72,10 @@ const MainRoutes = {
         {
           path: 'customers/:id',
           element: <CustomerDetail />
+        },
+        {
+          path: 'payments',
+          element: <Payments />
         }
       ]
     }
