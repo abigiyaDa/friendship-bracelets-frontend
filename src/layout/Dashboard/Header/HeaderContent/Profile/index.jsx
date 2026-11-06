@@ -1,55 +1,32 @@
-import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import ButtonBase from '@mui/material/ButtonBase';
 import CardContent from '@mui/material/CardContent';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 // project imports
-import ProfileTab from './ProfileTab';
-import SettingTab from './SettingTab';
-import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
-import IconButton from 'components/@extended/IconButton';
 import { useAuth } from 'admin/auth/AuthContext';
 
 // assets
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
-import SettingOutlined from '@ant-design/icons/SettingOutlined';
-import UserOutlined from '@ant-design/icons/UserOutlined';
-import avatar1 from 'assets/images/users/avatar-1.png';
 
-// tab panel wrapper
-function TabPanel({ children, value, index, ...other }) {
-  return (
-    <div role="tabpanel" hidden={value !== index} id={`profile-tabpanel-${index}`} aria-labelledby={`profile-tab-${index}`} {...other}>
-      {value === index && children}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `profile-tab-${index}`,
-    'aria-controls': `profile-tabpanel-${index}`
-  };
-}
+const initialFor = (name) => (name ? String(name).trim().charAt(0).toUpperCase() : 'A');
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
 export default function Profile() {
-  const theme = useTheme();
   const { user, logout } = useAuth();
 
   const anchorRef = useRef(null);
@@ -70,11 +47,8 @@ export default function Profile() {
     logout();
   };
 
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const username = user?.username || 'Admin';
+  const email = user?.email || 'No email on file';
 
   return (
     <Box sx={{ flexShrink: 0, ml: 'auto' }}>
@@ -91,7 +65,7 @@ export default function Profile() {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <Avatar alt="profile user" src={avatar1} size="sm" sx={{ '&:hover': { outline: '1px solid', outlineColor: 'primary.main' } }} />
+          <Avatar sx={{ width: 36, height: 36, fontSize: '1rem', bgcolor: 'primary.main' }}>{initialFor(username)}</Avatar>
         </ButtonBase>
       </Tooltip>
       <Popper
@@ -117,67 +91,47 @@ export default function Profile() {
             <Paper sx={(theme) => ({ boxShadow: theme.vars.customShadows.z1, width: 290, minWidth: 240, maxWidth: { xs: 250, md: 290 } })}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard elevation={0} border={false} content={false}>
-                  <CardContent sx={{ px: 2.5, pt: 3 }}>
-                    <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center' }}>
-                        <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
-                        <Stack>
-                          <Typography variant="h6">{user?.username || 'Admin'}</Typography>
-                          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                            {user?.email || 'Administrator'}
-                          </Typography>
-                        </Stack>
-                      </Stack>
-                      <Tooltip title="Logout">
-                        <IconButton size="large" sx={{ color: 'text.primary' }} onClick={handleLogout}>
-                          <LogoutOutlined />
-                        </IconButton>
-                      </Tooltip>
+                  <CardContent sx={{ px: 2.5, py: 2 }}>
+                    <Stack direction="row" sx={{ gap: 1.5, alignItems: 'center' }}>
+                      <Avatar sx={{ width: 48, height: 48, fontSize: '1.25rem', bgcolor: 'primary.main' }}>{initialFor(username)}</Avatar>
+                      <Box sx={{ minWidth: 0 }}>
+                        <Typography variant="h6" noWrap>
+                          {username}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: 'text.secondary', wordBreak: 'break-all' }}>
+                          {email}
+                        </Typography>
+                      </Box>
                     </Stack>
-                  </CardContent>
 
-                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="profile tabs">
-                      <Tab
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          textTransform: 'capitalize',
-                          gap: 1.25,
-                          '& .MuiTab-icon': {
-                            marginBottom: 0
-                          }
-                        }}
-                        icon={<UserOutlined />}
-                        label="Profile"
-                        {...a11yProps(0)}
-                      />
-                      <Tab
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          textTransform: 'capitalize',
-                          gap: 1.25,
-                          '& .MuiTab-icon': {
-                            marginBottom: 0
-                          }
-                        }}
-                        icon={<SettingOutlined />}
-                        label="Setting"
-                        {...a11yProps(1)}
-                      />
-                    </Tabs>
-                  </Box>
-                  <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ProfileTab onLogout={handleLogout} />
-                  </TabPanel>
-                  <TabPanel value={value} index={1} dir={theme.direction}>
-                    <SettingTab />
-                  </TabPanel>
+                    <Divider sx={{ my: 1.75 }} />
+
+                    <Stack sx={{ gap: 0.75, typography: 'body2' }}>
+                      <Stack direction="row" sx={{ justifyContent: 'space-between', gap: 2 }}>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                          Is staff
+                        </Typography>
+                        <Typography variant="body2">{user?.is_staff ? 'Yes' : 'No'}</Typography>
+                      </Stack>
+                      <Stack direction="row" sx={{ justifyContent: 'space-between', gap: 2 }}>
+                        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                          Is superuser
+                        </Typography>
+                        <Typography variant="body2">{user?.is_superuser ? 'Yes' : 'No'}</Typography>
+                      </Stack>
+                    </Stack>
+
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      fullWidth
+                      startIcon={<LogoutOutlined />}
+                      onClick={handleLogout}
+                      sx={{ mt: 2 }}
+                    >
+                      Logout
+                    </Button>
+                  </CardContent>
                 </MainCard>
               </ClickAwayListener>
             </Paper>
@@ -187,5 +141,3 @@ export default function Profile() {
     </Box>
   );
 }
-
-TabPanel.propTypes = { children: PropTypes.node, value: PropTypes.number, index: PropTypes.number, other: PropTypes.any };
